@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radify - Degree to Radian Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h2>Radify</h2>
+            <p>by Tanmay Bhardwaj</p>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Degree to Radian Converter</h1>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label for="degrees">Enter degrees:</label>
+                <input type="text" id="degrees" name="degrees" placeholder="Enter angle in degrees" required>
+            </div>
+            <button type="submit">Convert</button>
+        </form>
+        
+        {% if result %}
+        <div class="result">
+            <p>{{ result }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Reference Section -->
+        <div class="reference-section">
+            <h2>Common Angles Reference</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Degrees</th>
+                        <th>Radians (in terms of π)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for angle in common_angles %}
+                    <tr>
+                        <td>{{ angle.degrees }}°</td>
+                        <td>
+                            {% if angle.radians.numerator == 0 %}
+                                0
+                            {% elif angle.radians.denominator == 1 %}
+                                {{ angle.radians.numerator }}π
+                            {% else %}
+                                {{ angle.radians.numerator }}/{{ angle.radians.denominator }}π
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="copyright">
+            &copy; 2025 Radify by Tanmay Bhardwaj. All rights reserved.
+        </div>
+        <div class="contact">
+            <a href="https://www.instagram.com/tanmaybhardwaj__?igsh=MXM0c2F1bHB4MGZoYQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/tanmay-bhardwaj-448481334?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/_TanmayBhardwaj?t=89udqEjcK3YlBUlVLlSSdw&s=09" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/Tanmay-Bhardwaj" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://tanmaybhardwaj.com/" target="_blank"><i class="fas fa-globe"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
